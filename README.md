@@ -41,6 +41,16 @@ spacetug_mujoco/
 └── tools/compare_parity.py   Compare Python/C++ CSV logs
 ```
 
+
+
+
+
+<img src="https://github.com/gaolongsen/picx-images-hosting/raw/master/tug_mujoco_show.96afdvpyrv.gif" style="zoom:200%;" />
+
+
+
+
+
 ## 🚀 Quick Start
 
 | Goal | Command |
@@ -82,10 +92,14 @@ python python/spacetug_sim.py --headless --traj fig8 --duration 120 --csv parity
 The Python viewer uses MuJoCo's built-in interactive viewer, so standard MuJoCo
 camera, selection, and perturb controls are available.
 
+![](https://github.com/gaolongsen/picx-images-hosting/raw/master/8shapetraj.6f1d5tkj1j.gif)
+
 ## 🧱 C++ Version
 
 The C++ executable supports both the interactive viewer and deterministic
 headless runs. GLFW is required only for the interactive window.
+
+<img src="https://github.com/gaolongsen/picx-images-hosting/raw/master/cpptwoshapetraj.9rk308271o.gif" style="zoom:67%;" />
 
 ### ✅ This PC
 
