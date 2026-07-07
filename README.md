@@ -45,7 +45,7 @@ spacetug_mujoco/
 
 
 
-<img src="https://github.com/gaolongsen/picx-images-hosting/raw/master/tug_mujoco_show.96afdvpyrv.gif" style="zoom:200%;" />
+<img src="https://github.com/gaolongsen/picx-images-hosting/raw/master/tug_mujoco_show.96afdvpyrv.gif" style="zoom:400%;" />
 
 
 
