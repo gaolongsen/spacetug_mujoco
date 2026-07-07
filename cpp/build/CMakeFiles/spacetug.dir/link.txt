@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/spacetug.dir/src/main.cpp.o -o spacetug  -Wl,-rpath,/home/agman/.mujoco/mujoco-3.10.0-x86_64/lib /home/agman/.mujoco/mujoco-3.10.0-x86_64/lib/libmujoco.so /usr/lib/x86_64-linux-gnu/libglfw.so.3.3 

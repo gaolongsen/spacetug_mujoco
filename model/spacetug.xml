@@ -1,0 +1,62 @@
+<mujoco model="unm_space_tug">
+  <!--
+    UNM Space Tug, 6-nozzle RCS, zero-g trajectory tracking.
+    Units: meters (STL is mm, scaled by 0.01). Coordinates match the web demo
+    (model bbox-centered; craft "top" with nozzles T5/T6 along +y).
+
+    Nozzle geometry was extracted from the STL end-cap normals:
+      T1..T4  side nozzles, canted 30 deg below the horizontal
+      T5,T6   vertical nozzles on the +y face (main engines, thrust -y)
+    Site z-axis = THRUST direction (= minus exhaust direction).
+    Each <motor> applies F = 0.26 N * ctrl along the site z-axis at the site
+    position, so parasitic torques r x F are physically real in this model.
+  -->
+  <compiler meshdir="../assets" angle="radian"/>
+
+  <option gravity="0 0 0" timestep="0.002" integrator="RK4">
+    <flag contact="disable"/>
+  </option>
+
+  <visual>
+    <headlight ambient="0.32 0.32 0.36" diffuse="0.55 0.53 0.50" specular="0.25 0.25 0.25"/>
+    <quality shadowsize="0"/>
+    <map force="0.1"/>
+  </visual>
+
+  <asset>
+    <texture name="space" type="skybox" builtin="gradient"
+             rgb1="0.020 0.034 0.072" rgb2="0.0 0.0 0.004" width="512" height="512"/>
+    <mesh name="tug" file="tugnew5_centered.stl" scale="0.01 0.01 0.01"/>
+  </asset>
+
+  <worldbody>
+    <light name="key" directional="true" pos="2 3 2"  dir="-0.45 -0.7 -0.45" diffuse="0.85 0.81 0.72"/>
+    <light name="rim" directional="true" pos="-3 -1 -2" dir="0.65 0.25 0.5"  diffuse="0.22 0.30 0.48"/>
+
+    <body name="tug" pos="0 0 0">
+      <freejoint/>
+      <!-- mass/inertia chosen to match the reference web-demo dynamics
+           (1 kg, I = 0.03 kg m^2 isotropic) -->
+      <inertial pos="0 0 0" mass="1.0" diaginertia="0.03 0.03 0.03"/>
+      <geom type="mesh" mesh="tug" rgba="0.72 0.76 0.81 1"
+            contype="0" conaffinity="0"/>
+
+      <!-- nozzle exit sites; zaxis = thrust direction -->
+      <site name="thr1" pos="-0.2160 -0.1137  0.0000" zaxis=" 0.8660254  0.5  0.0"       size="0.004" rgba="1 0.7 0.3 0"/>
+      <site name="thr2" pos=" 0.2164 -0.1294  0.0000" zaxis="-0.8660254  0.5  0.0"       size="0.004" rgba="1 0.7 0.3 0"/>
+      <site name="thr3" pos=" 0.0136  0.0062 -0.2029" zaxis=" 0.0        0.5  0.8660254" size="0.004" rgba="1 0.7 0.3 0"/>
+      <site name="thr4" pos=" 0.0056 -0.0027  0.2032" zaxis=" 0.0        0.5 -0.8660254" size="0.004" rgba="1 0.7 0.3 0"/>
+      <site name="thr5" pos="-0.0805  0.2250  0.0004" zaxis=" 0.0       -1.0  0.0"       size="0.004" rgba="1 0.7 0.3 0"/>
+      <site name="thr6" pos=" 0.0855  0.2250  0.0004" zaxis=" 0.0       -1.0  0.0"       size="0.004" rgba="1 0.7 0.3 0"/>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <motor name="t1" site="thr1" gear="0 0 0.26 0 0 0" ctrlrange="0 1"/>
+    <motor name="t2" site="thr2" gear="0 0 0.26 0 0 0" ctrlrange="0 1"/>
+    <motor name="t3" site="thr3" gear="0 0 0.26 0 0 0" ctrlrange="0 1"/>
+    <motor name="t4" site="thr4" gear="0 0 0.26 0 0 0" ctrlrange="0 1"/>
+    <motor name="t5" site="thr5" gear="0 0 0.26 0 0 0" ctrlrange="0 1"/>
+    <motor name="t6" site="thr6" gear="0 0 0.26 0 0 0" ctrlrange="0 1"/>
+  </actuator>
+</mujoco>
